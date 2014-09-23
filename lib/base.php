@@ -1273,7 +1273,7 @@ class Base extends Prefab {
 				// Save matching route
 				$this->hive['PATTERN']=$url;
 				// Process request
-				$body='';
+				$call = null; $body='';
 				$now=microtime(TRUE);
 				if (preg_match('/GET|HEAD/',$this->hive['VERB']) &&
 					isset($ttl)) {
@@ -1301,7 +1301,7 @@ class Base extends Prefab {
 						$this->hive['BODY']=file_get_contents('php://input');
 					ob_start();
 					// Call route handler
-					$this->call($handler,array($this,$args),
+					$call = $this->call($handler,array($this,$args),
 						'beforeroute,afterroute');
 					$body=ob_get_clean();
 					if ($ttl && !error_get_last())
@@ -1324,7 +1324,7 @@ class Base extends Prefab {
 					else
 						echo $body;
 				}
-				return;
+				return $call;
 			}
 			$allowed=array_keys($route);
 			break;
