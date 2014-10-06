@@ -1588,7 +1588,10 @@ class Base extends Prefab {
 			$error && in_array($error['type'],
 			array(E_ERROR,E_PARSE,E_CORE_ERROR,E_COMPILE_ERROR)))
 			// Fatal error detected
-			$this->error(500,sprintf(self::E_Fatal,$error['message']));
+			$this->error(500,sprintf(self::E_Fatal,$error['message']),[[
+				'file' => $error['file'],
+				'line' => $error['line']
+			]]);
 	}
 
 	//! Prohibit cloning
@@ -1615,9 +1618,12 @@ class Base extends Prefab {
 			}
 		);
 		set_error_handler(
-			function($code,$text) use($fw) {
+			function($code,$text,$file,$line) use($fw) {
 				if (error_reporting())
-					$fw->error(500,$text);
+					$fw->error(500,$text,[[
+						'file' => $file,
+						'line' => $line
+					]]);
 			}
 		);
 		if (!isset($_SERVER['SERVER_NAME']))
