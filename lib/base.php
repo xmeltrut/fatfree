@@ -2607,7 +2607,7 @@ final class Registry {
 
 	private static
 		//! Object catalog
-		$table;
+		$table = [];
 
 	/**
 	*	Return TRUE if object exists in catalog
@@ -2615,7 +2615,13 @@ final class Registry {
 	*	@param $key string
 	**/
 	static function exists($key) {
-		return isset(self::$table[$key]);
+		foreach (self::$table as $obj) {
+			if ($obj instanceof $key) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -2634,7 +2640,11 @@ final class Registry {
 	*	@param $key string
 	**/
 	static function get($key) {
-		return self::$table[$key];
+		foreach (self::$table as $obj) {
+			if ($obj instanceof $key) {
+				return $obj;
+			}
+		}
 	}
 
 	/**
@@ -2657,4 +2667,4 @@ final class Registry {
 
 }
 
-return Base::instance();
+//return Base::instance();
