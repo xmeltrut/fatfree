@@ -3,6 +3,8 @@ This is a fork of the Fat-Free Framework with the following changes:
 * Base.run() method returns the result of the call
 * Composer file has autoload information included
 * Fatal error handling includes a stack trace
+* Base object is not automatically instanced
+* Support for extending Base added to the Registry class
 
 [![Fat-Free Framework](ui/images/logo.png)](http://fatfree.sf.net/)
 
