@@ -1,3 +1,9 @@
+This is a fork of the Fat-Free Framework with the following changes:
+
+* Base.run() method returns the result of the call
+* Composer file has autoload information included
+* Fatal error handling includes a stack trace
+
 [![Fat-Free Framework](ui/images/logo.png)](http://fatfree.sf.net/)
 
 **A powerful yet easy-to-use PHP micro-framework designed to help you build dynamic and robust Web applications - fast!**
